@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="10e09980-ce58-4582-8f46-94ab771082d8" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/code/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/code/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/code/vendor/fig/http-message-util" />
+      <path value="$PROJECT_DIR$/code/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/code/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/code/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/code/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/code/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/code/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/code/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/code/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/code/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/code/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/code/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/code/vendor/php-di/phpdoc-reader" />
+      <path value="$PROJECT_DIR$/code/vendor/php-di/php-di" />
+      <path value="$PROJECT_DIR$/code/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/code/vendor/php-di/invoker" />
+      <path value="$PROJECT_DIR$/code/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/code/vendor/psr/http-server-handler" />
+      <path value="$PROJECT_DIR$/code/vendor/psr/http-server-middleware" />
+      <path value="$PROJECT_DIR$/code/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/code/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/code/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/code/vendor/slim/slim" />
+      <path value="$PROJECT_DIR$/code/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/code/vendor/nikic/fast-route" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/code/vendor/slim/psr7" />
+      <path value="$PROJECT_DIR$/code/vendor/laravel/serializable-closure" />
+      <path value="$PROJECT_DIR$/code/vendor/hassankhan/config" />
+      <path value="$PROJECT_DIR$/code/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/code/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/code/vendor/2bj/phanybar" />
+      <path value="$PROJECT_DIR$/code/vendor/codedungeon/phpunit-result-printer" />
+      <path value="$PROJECT_DIR$/code/vendor/codedungeon/php-cli-colors" />
+      <path value="$PROJECT_DIR$/code/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/code/vendor/composer" />
+      <path value="$PROJECT_DIR$/code/vendor/phpstan/phpstan" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="2LYKN3E53qsilLATmCQZcS80V37" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.vendoring.notification.had.been.shown": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "go.import.settings.migrated": "true",
+    "last_opened_file_path": "/Users/apalma/Documents/SRE/sre-task",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="10e09980-ce58-4582-8f46-94ab771082d8" name="Changes" comment="" />
+      <created>1676042533080</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676042533080</updated>
+      <workItem from="1676042534207" duration="972000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>
