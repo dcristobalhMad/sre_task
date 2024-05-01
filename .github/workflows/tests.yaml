@@ -23,7 +23,7 @@ jobs:
         run: sleep 30
 
       - name: Run PHPUnit tests
-        run: docker exec -it $(docker-compose ps -q php) vendor/bin/phpunit test
+        run: docker exec --entrypoint sh -it $(docker-compose ps -q php) php vendor/bin/phpunit test
 
   terraform:
     name: "Terraform Infrastructure"
