@@ -1,0 +1,67 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: traefik
+  namespace: flux-system
+spec:
+  interval: 1h0m0s
+  url: https://traefik.github.io/charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: traefik
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+      version: ">=24.0.0"
+  interval: 1h0m0s
+  releaseName: traefik
+  targetNamespace: core
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  values:
+    deployment:
+      kind: DaemonSet
+    api:
+      dashboard: true
+    logs:
+      general:
+        level: INFO
+    providers:
+      kubernetesCRD:
+        # -- Load Kubernetes IngressRoute provider
+        enabled: true
+        allowCrossNamespace: true
+        # -- Allows to reference ExternalName services in IngressRoute
+        allowExternalNameServices: true
+        # -- Allows to return 503 when there is no endpoints available
+        allowEmptyServices: true
+        # ingressClass: traefik-internal
+        # labelSelector: environment=production,method=traefik
+        namespaces:
+          []
+          # - "default"
+
+      kubernetesIngress:
+        # -- Load Kubernetes IngressRoute provider
+        enabled: true
+        # -- Allows to reference ExternalName services in Ingress
+        allowExternalNameServices: true
+        # -- Allows to return 503 when there is no endpoints available
+        allowEmptyServices: true
+        publishedService:
+          enabled: true
+      ingressRoute:
+        dashboard:
+          enabled: false
+      additionalArguments:
+        - "--api.insecure=true"
