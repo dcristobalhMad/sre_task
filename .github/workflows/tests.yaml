@@ -3,13 +3,13 @@ name: Tests and terraform plan
 on:
   pull_request:
     branches:
-      - main # Adjust this if your main branch has a different name
+      - main
 
 jobs:
   test:
     name: Run PHPUnit tests
     runs-on: ubuntu-latest
-
+    working-directory: ./code
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -17,10 +17,10 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.3" # Adjust the PHP version as needed
+          php-version: "8.3"
 
       - name: Install dependencies
-        run: composer install --no-interaction --no-progress --no-suggest
+        run: composer install --no-interaction --no-progress
 
       - name: Run PHPUnit
         run: vendor/bin/phpunit test
@@ -28,6 +28,13 @@ jobs:
   terraform:
     name: "Terraform Infrastructure"
     runs-on: ubuntu-latest
+    env:
+      # Credentials for deployment to CIVO
+      TF_VAR_civo_token: ${{ secrets.TF_VAR_CIVO_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: us-east-1
+      TF_VAR_flux_github_token: ${{ secrets.TF_VAR_FLUX_GITHUB_TOKEN }}
     defaults:
       run:
         shell: bash
