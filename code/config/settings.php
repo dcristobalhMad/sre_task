@@ -22,11 +22,11 @@ return static function (ContainerBuilder $containerBuilder)
                     'level' => Logger::DEBUG,
                 ],
                 'database' => [
-                    'host' => 'db',
+                    'host' => 'mysql',
                     'port' => '3306',
                     'name' => 'minipokedex',
-                    'user' => 'root',
-                    'password' => 'root',
+                    'user' => 'pokemon_user',
+                    'password' => 'pokemon_password',
                     'charset' => 'utf8mb4',
                 ],
                 'redis' => [
