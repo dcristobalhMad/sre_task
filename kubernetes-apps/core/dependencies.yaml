@@ -10,7 +10,7 @@ spec:
     - name: manifests
   sourceRef:
     kind: GitRepository
-    name: flux-manifests
+    name: core-apps
   path: "./kubernetes-apps/dependencies/"
   prune: true
   timeout: 1m
