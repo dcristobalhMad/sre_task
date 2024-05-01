@@ -1,0 +1,60 @@
+name: Tests and terraform plan
+
+on:
+  pull_request:
+    branches:
+      - main # Adjust this if your main branch has a different name
+
+jobs:
+  test:
+    name: Run PHPUnit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3" # Adjust the PHP version as needed
+
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --no-suggest
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit test
+
+  terraform:
+    name: "Terraform Infrastructure"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        # We keep Terraform files in the infra directory.
+        working-directory: ./infra
+
+    steps:
+      - name: Checkout the repository to the runner
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform with specified version on the runner
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.7.5
+
+      - name: Terraform init
+        id: init
+        run: terraform init -upgrade
+
+      - name: Terraform format
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform plan
+        id: plan
+        run: terraform plan -no-color -input=false
