@@ -45,7 +45,7 @@ resource "flux_bootstrap_git" "this" {
   interval             = "1m0s"
   namespace            = "flux-system"
   components           = ["source-controller", "kustomize-controller", "helm-controller", "notification-controller"]
-  path                 = "${local.cluster_name}"
+  path                 = local.cluster_name
   watch_all_namespaces = true
 }
 
