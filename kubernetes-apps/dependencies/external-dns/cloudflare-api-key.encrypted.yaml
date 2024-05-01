@@ -1,0 +1,18 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: "true"
+  creationTimestamp: null
+  name: cloudflare-api-key
+  namespace: core
+spec:
+  encryptedData:
+    api-key: AgAFkmy+9yyVnIilfoFtIUHXmPKN3/fPb0XFwF7R+IPp9dl3dN2ooEBz6j2WgTm2BB0a4wvpfGRmdpEEtZpo9aRKsSUjn4i8EoSH7ROZjvTZNXxyZzAwIhrRhGLpiZZKoEUqhJjpolRKShbsw7RbT4qLER8Pd6aeS2XuBRL14twNQ7c/EowzClL6spXXTivuSKmw9zLmd0rsmXUVUxqT+3iQSIrEolOe07NodXUZfTHMUjSRW/yn2NBWRro4u37jDtVkhpNjye9f/bjRckN/FKb44yWNF+XxU+Zt2sZHt847Dtozu+iPO464kQ4FEhuFobHWn/ouJH3/zcu5S3IdeU/OG73h4xMzPIJC7ktiVSMibC1L6G6rj2Z4HV+qHJ3s76GeekiiUvKtzmvbn1m0aU+ah7h8aKjFE76Oqvc02xmvsIzZVUvQ1dis+U60AZJRq1BLGvRou2MZfcmpBk3Ut0K1VOV4UAgxlcqWHVbSy9+fboFfOrXH1lh3RPcSr7hctS7kH1ZQoPm7dnAAzPj9ooMClByKaeMTld5eU8PXOys9zBjxVPTqsAPoNZXOmLns7jMtINAiiDXLzdB2KqSK9TKS5Zr4sepw0hzb0NH6PuSC3rzPuJhW4l+I79JEtnmDLAstbUPWY0ZZkrIy6z0kFLq1pqKjtKrh3Rg3FMuwh5WuiP3+fwQqu5svUKWPmjqSiEXJRAYbxUSgFeYgiwdOkUKglXkiWZDNpAB8emr3bbz2gtLGsqIw
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: "true"
+      creationTimestamp: null
+      name: cloudflare-api-key
+      namespace: core
