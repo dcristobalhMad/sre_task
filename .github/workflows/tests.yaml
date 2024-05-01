@@ -9,7 +9,9 @@ jobs:
   test:
     name: Run PHPUnit tests
     runs-on: ubuntu-latest
-    working-directory: ./code
+    defaults:
+      run:
+        working-directory: ./code
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
