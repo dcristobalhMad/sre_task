@@ -15,3 +15,7 @@ INSERT INTO pokemon (`name`, `type`) VALUES
                                          ('bulbasaur', 'planta'),
                                          ('charmander', 'fuego'),
                                          ('squirtle', 'agua');
+
+GRANT ALL PRIVILEGES ON minipokedex.* TO 'exampleuser'@'%';
+
+FLUSH PRIVILEGES;

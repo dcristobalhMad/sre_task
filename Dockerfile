@@ -15,6 +15,9 @@ RUN apk update && \
     apk add --no-cache unzip curl && \
     apk add --no-cache $PHPIZE_DEPS && \
     docker-php-ext-install pdo_mysql && \
+    apk add --no-cache libmemcached-dev zlib-dev && \
+    pecl install memcached && \
+    docker-php-ext-enable memcached && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     composer update && \
     composer install && \

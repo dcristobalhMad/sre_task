@@ -7,8 +7,7 @@ use GR\DevEnvBoilerplate\Infrastructure\Slim\Setting\SettingsInterface;
 use DI\ContainerBuilder;
 use Monolog\Logger;
 
-return static function (ContainerBuilder $containerBuilder)
-{
+return static function (ContainerBuilder $containerBuilder) {
     // Global Settings Object
     $containerBuilder->addDefinitions([
         SettingsInterface::class => function () {
@@ -22,23 +21,24 @@ return static function (ContainerBuilder $containerBuilder)
                     'level' => Logger::DEBUG,
                 ],
                 'database' => [
-                    'host' => 'mysql',
-                    'port' => '3306',
-                    'name' => 'minipokedex',
-                    'user' => 'pokemon_user',
-                    'password' => 'pokemon_password',
-                    'charset' => 'utf8mb4',
+                    'host' => $_ENV['DB_HOST'] ?? 'mysql',
+                    'port' => $_ENV['DB_PORT'] ?? '3306',
+                    'name' => $_ENV['DB_NAME'] ?? 'minipokedex',
+                    'user' => $_ENV['DB_USER'] ?? 'pokemonuser',
+                    'password' => $_ENV['DB_PASSWORD'] ?? 'pokemonpassword',
+                    'charset' => $_ENV['DB_CHARSET'] ?? 'utf8mb4',
                 ],
                 'redis' => [
                     'schema' => 'tcp',
-                    'host' => 'redis',
-                    'port' => '6379',
+                    'host' => $_ENV['REDIS_HOST'] ?? 'redis',
+                    'port' => $_ENV['REDIS_PORT'] ?? '6379',
                 ],
                 'memcached' => [
-                    'host' => 'memcached',
-                    'port' => 11211,
+                    'host' => $_ENV['MEMCACHED_HOST'] ?? 'memcached',
+                    'port' => $_ENV['MEMCACHED_PORT'] ?? 11211,
                 ],
             ]);
         }
     ]);
 };
+
