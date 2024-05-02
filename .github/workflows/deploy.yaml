@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: kubeconfig
-          path: kubeconfig
+          path: ./infra/kubeconfig
 
   Build-Push-Deploy:
     # Build and push Docker image
@@ -97,7 +97,7 @@ jobs:
         with:
           name: kubeconfig
 
-      - name: Read file
+      - name: Move kubeconfig to default location
         run: mv kubeconfig/kubeconfig ~/.kube/config
 
       - name: Install Helm
