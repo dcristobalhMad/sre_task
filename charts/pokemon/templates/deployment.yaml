@@ -15,6 +15,9 @@ spec:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
+        "helm.sh/hook": pre-install
+        "helm.sh/hook-weight": "1"
+        "helm.sh/hook-delete-policy": before-hook-creation
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
@@ -42,12 +45,15 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /charmander
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /charmander
               port: http
+          envFrom:
+            - secretRef:
+                name: db-variables
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}

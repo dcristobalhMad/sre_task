@@ -1,4 +1,4 @@
-name: Tests and terraform plan
+name: Tests, build and terraform plan
 
 on:
   pull_request:

@@ -54,14 +54,14 @@ ingress:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
   hosts:
-    - host: staging.kcdlarioja.com
+    - host: production.kcdlarioja.com
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
     - hosts:
-        - staging.kcdlarioja.com
-      secretName: staging-kcdlarioja-tls
+        - production.kcdlarioja.com
+      secretName: production-kcdlarioja-tls
 
 resources:
   {}
