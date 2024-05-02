@@ -97,8 +97,11 @@ jobs:
         with:
           name: kubeconfig
 
+      - name: Create kubeconfig directory
+        run: mkdir -p ~/.kube
+
       - name: Move kubeconfig to default location
-        run: mv ./infra/kubeconfig ~/.kube/config
+        run: mv kubeconfig ~/.kube/config
 
       - name: Install Helm
         run: |
