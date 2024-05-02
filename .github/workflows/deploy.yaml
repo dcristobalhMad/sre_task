@@ -1,5 +1,5 @@
 ---
-name: "Deploy Terraform Infrastructure"
+name: "Deploy pipeline (Terraform and App)"
 
 on:
   push:
@@ -51,9 +51,15 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false
 
-  Build-Push-image:
-    runs-on: ubuntu-latest
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kubeconfig
+          path: ./infra/kubeconfig
 
+  Build-Push-Deploy:
+    # Build and push Docker image
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -80,13 +86,18 @@ jobs:
           tags: |
             dcristobal/pokemon-app:latest
             dcristobal/pokemon-app:${{ steps.timestamp.outputs.TIMESTAMP }}
-  Deploy-pokemon-app:
-    name: Deploy pokemon app to staging
-    runs-on: ubuntu-latest
-    needs: Build-Push-image
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      # Deploy applications to staging and production
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: kubeconfig
+
+      - name: Create kubeconfig directory
+        run: mkdir -p ~/.kube
+
+      - name: Move kubeconfig to default location
+        run: mv kubeconfig ~/.kube/config
+
       - name: Install Helm
         run: |
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
@@ -94,7 +105,7 @@ jobs:
           ./get_helm.sh
       - name: Deploy pokemon app to staging
         run: |
-          helm upgrade --install pokemon-app charts/pokemon -set image.tag="${{ steps.timestamp.outputs.TIMESTAMP }}" -n staging
+          helm upgrade --install pokemon-app charts/pokemon --set image.tag="${{ steps.timestamp.outputs.TIMESTAMP }}" -n staging
       - name: manual-approval
         uses: trstringer/manual-approval@v1
         with:
@@ -107,6 +118,6 @@ jobs:
           additional-approved-words: ""
           additional-denied-words: ""
 
-      - name: Deploy pokemon app to staging
+      - name: Deploy pokemon app to production
         run: |
-          helm upgrade --install pokemon-app charts/pokemon -set image.tag="${{ steps.timestamp.outputs.TIMESTAMP }}" --values charts/pokemon/values-prod.yaml -n production
+          helm upgrade --install pokemon-app charts/pokemon --set image.tag="${{ steps.timestamp.outputs.TIMESTAMP }}" --values charts/pokemon/values-prod.yaml -n production
