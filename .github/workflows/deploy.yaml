@@ -58,7 +58,6 @@ jobs:
 
   Build-Push-image:
     runs-on: ubuntu-latest
-    id: build-push
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -99,7 +98,7 @@ jobs:
           ./get_helm.sh
       - name: Deploy pokemon app to staging
         run: |
-          helm upgrade --install pokemon-app charts/pokemon --set image.tag="${{ needs.build-push.steps.timestamp.outputs.TIMESTAMP }}" -n staging
+          helm upgrade --install pokemon-app charts/pokemon --set image.tag="${{ needs.Build-Push-image.steps.timestamp.outputs.TIMESTAMP }}" -n staging
       - name: manual-approval
         uses: trstringer/manual-approval@v1
         with:
