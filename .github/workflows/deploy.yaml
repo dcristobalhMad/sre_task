@@ -123,6 +123,6 @@ jobs:
           additional-approved-words: ""
           additional-denied-words: ""
 
-      - name: Deploy pokemon app to staging
+      - name: Deploy pokemon app to production
         run: |
-          helm upgrade --install pokemon-app charts/pokemon -set image.tag="${{ steps.timestamp.outputs.TIMESTAMP }}" --values charts/pokemon/values-prod.yaml -n production
+          helm upgrade --install pokemon-app charts/pokemon --set image.tag="${{ steps.timestamp.outputs.TIMESTAMP }}" --values charts/pokemon/values-prod.yaml -n production
