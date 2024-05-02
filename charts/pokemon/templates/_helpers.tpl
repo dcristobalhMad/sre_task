@@ -60,3 +60,49 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "pokemon.pre-install" -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  template:
+    spec:
+      containers:
+        - name: mysql-client
+          image: mysql:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              set -o pipefail
+              MYSQL_HOST="${DB_HOST}"
+              MYSQL_PORT="${MYSQL_PORT:-3306}"
+              MYSQL_USER="${DB_USER}"
+              MYSQL_PASSWORD="${DB_PASSWORD}"
+              DATABASE_NAME="${DB_NAME}"
+
+              mysql -h $MYSQL_HOST -P $MYSQL_PORT -u $MYSQL_USER -p$MYSQL_PASSWORD <<EOF
+              CREATE DATABASE IF NOT EXISTS minipokedex;
+
+              USE minipokedex;
+
+              CREATE TABLE IF NOT EXISTS pokemon (
+                                  \`id\` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                                  \`name\` VARCHAR(14) NOT NULL,
+                                  \`type\` VARCHAR(14) NOT NULL,
+                                  PRIMARY KEY (\`id\`)
+              );
+
+              USE minipokedex;
+
+              INSERT INTO pokemon (\`name\`, \`type\`) VALUES
+                                                    ('bulbasaur', 'planta'),
+                                                    ('charmander', 'fuego'),
+                                                    ('squirtle', 'agua');
+              EOF
+          envFrom:
+            - secretRef:
+                name: db-variables
+      restartPolicy: Never
+{{- end -}}

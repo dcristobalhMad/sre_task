@@ -31,11 +31,11 @@ return static function (ContainerBuilder $containerBuilder) {
                 'redis' => [
                     'schema' => 'tcp',
                     'host' => $_ENV['REDIS_HOST'] ?? 'redis',
-                    'port' => $_ENV['REDIS_PORT'] ?? '6379',
+                    'port' => $_ENV['REDIS_PORT'] ?? 6379,
                 ],
                 'memcached' => [
                     'host' => $_ENV['MEMCACHED_HOST'] ?? 'memcached',
-                    'port' => $_ENV['MEMCACHED_PORT'] ?? 11211,
+                    'port' => intval($_ENV['MEMCACHED_PORT'] ?? 11211),
                 ],
             ]);
         }

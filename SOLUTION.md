@@ -13,3 +13,11 @@
 - Deploy core apps in the cluster with FluxCD
 - Create secrets in each environment (Staging and production) with the values of the environment variables
 - Deploy the application in the cluster with Helm in two environments (Staging and Production)
+- Fix this issue in Kubernetes:
+
+```
+    "statusCode": 500,
+        "error": {
+            "type": "SERVER_ERROR",
+            "description": "ERROR: stream_socket_client(): Unable to connect to tcp:\/\/redis:tcp:6379 (Operation timed out) on line 108 in file \/var\/www\/html\/vendor\/predis\/predis\/src\/Connection\/StreamConnection.php."
+```
