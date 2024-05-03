@@ -6,8 +6,8 @@ dev:
 dev-logs:
 	docker-compose logs -f
 
-rm-dev:
+dev-rm:
 	docker-compose rm
 
-dev-down:
+dev-stop:
 	docker-compose down
