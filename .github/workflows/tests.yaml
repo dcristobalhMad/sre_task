@@ -32,9 +32,20 @@ jobs:
           context: .
           file: Dockerfile
           push: false
+          load: true
           tags: |
             dcristobal/pokemon-app:latest
             dcristobal/pokemon-app:${{ steps.timestamp.outputs.TIMESTAMP }}
+      # Scan image
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: "dcristobal/pokemon-app:${{ steps.timestamp.outputs.TIMESTAMP }}"
+          format: "table"
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: "os,library"
+          severity: "CRITICAL,HIGH"
 
   test:
     name: Run PHPUnit tests
