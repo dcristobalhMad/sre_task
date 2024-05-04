@@ -11,3 +11,6 @@ dev-rm:
 
 dev-stop:
 	docker-compose down
+
+dev-tests: dev
+	docker exec $$(docker-compose ps -q php) sh -c "php vendor/bin/phpunit test"
