@@ -19,9 +19,7 @@
 6- Use docker-compose to run the application and its dependencies
 
 7- Add a Makefile to simplify the execution of the application in local
-
-8- Deploy a kubernetes cluster in Terraform
-
+8- Deploy a kubernetes cluster with Terraform
 9- Deploy core apps in the cluster with FluxCD
 
 10- Create secrets in each environment (Staging and production) with the values of the environment variables and encrypt them with sealed-secrets
@@ -95,6 +93,12 @@ make dev-stop
 
 ```bash
 make dev-rm
+```
+
+- Execute tests with the following command:
+
+```bash
+make dev-tests
 ```
 
 ## Improvements
