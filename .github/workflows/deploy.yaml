@@ -105,12 +105,14 @@ jobs:
         run: mv kubeconfig ~/.kube/config
 
       - name: Install Helm
+        working-directory: /tmp
         run: |
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
           chmod 700 get_helm.sh
           ./get_helm.sh
 
       - name: Install Helmfile
+        working-directory: /tmp
         run: |
           wget https://github.com/helmfile/helmfile/releases/download/v0.159.0/helmfile_0.159.0_linux_amd64.tar.gz
           tar -xvf helmfile_0.159.0_linux_amd64.tar.gz helmfile
