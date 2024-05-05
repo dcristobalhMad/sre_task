@@ -47,9 +47,10 @@ jobs:
           vuln-type: "os,library"
           severity: "CRITICAL,HIGH"
 
-  test:
+  unit-tests:
     name: Run PHPUnit tests
     runs-on: ubuntu-latest
+    needs: Build-image
     defaults:
       run:
         working-directory: ./code
@@ -68,6 +69,33 @@ jobs:
 
       - name: Run PHPUnit tests
         run: docker exec $(docker-compose ps -q php) sh -c "php vendor/bin/phpunit test"
+
+  Diff-helmfile:
+    name: "Diff Helmfile"
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        working-directory: /tmp
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh
+
+      - name: Install Helmfile
+        working-directory: /tmp
+        run: |
+          wget https://github.com/helmfile/helmfile/releases/download/v0.159.0/helmfile_0.159.0_linux_amd64.tar.gz
+          tar -xvf helmfile_0.159.0_linux_amd64.tar.gz helmfile
+          rm helmfile_0.159.0_linux_amd64.tar.gz
+          mv helmfile /usr/local/bin/
+
+      - name: Diff Helmfile
+        run: helmfile diff
+        working-directory: ./helmfile
 
   terraform:
     name: "Terraform Infrastructure"
