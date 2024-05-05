@@ -113,7 +113,7 @@ jobs:
       - name: Install Helmfile
         run: |
           wget https://github.com/helmfile/helmfile/releases/download/v0.159.0/helmfile_0.159.0_linux_amd64.tar.gz
-          tar -xvf helmfile_0.159.0_linux_amd64.tar.gz
+          tar -xvf helmfile_0.159.0_linux_amd64.tar.gz helmfile
           rm helmfile_0.159.0_linux_amd64.tar.gz
           mv helmfile /usr/local/bin/
 
