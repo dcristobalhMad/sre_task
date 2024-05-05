@@ -93,6 +93,9 @@ jobs:
           rm helmfile_0.159.0_linux_amd64.tar.gz
           mv helmfile /usr/local/bin/
 
+      - name: Install helm diff plugin
+        run: helm plugin install https://github.com/databus23/helm-diff
+
       - name: Diff Helmfile staging
         run: helmfile -e ${environment} diff
         env:
