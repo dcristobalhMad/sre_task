@@ -97,12 +97,14 @@ jobs:
         run: helmfile -e ${environment} diff
         env:
           environment: staging
+          TIMESTAMP: 0.0.1
         working-directory: ./helmfile
 
       - name: Diff Helmfile production
         run: helmfile -e ${environment} diff
         env:
           environment: production
+          TIMESTAMP: 0.0.1
         working-directory: ./helmfile
 
   terraform:
