@@ -1,8 +1,13 @@
 ---
 name: "Deploy pipeline (Terraform and App)"
 
+# on:
+#   push:
+#     branches:
+#       - main
+
 on:
-  push:
+  pull_request:
     branches:
       - main
 
@@ -103,9 +108,16 @@ jobs:
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
           chmod 700 get_helm.sh
           ./get_helm.sh
+          wget https://github.com/helmfile/helmfile/releases/download/v0.159.0/helmfile_0.159.0_linux_amd64.tar.gz
+          tar -xxf helmfile_0.159.0_linux_amd64.tar.gz
+          rm helmfile_0.159.0_linux_amd64.tar.gz
+          mv helmfile /usr/local/bin/
+
       - name: Deploy pokemon app to staging
+        env:
+          environment: staging
         run: |
-          helm upgrade --install pokemon-app charts/pokemon --set image.tag="${{ steps.timestamp.outputs.TIMESTAMP }}" -n staging
+          cd helmfile && helmfile -e ${{ environment }} sync
       - name: manual-approval
         uses: trstringer/manual-approval@v1
         with:
@@ -119,5 +131,7 @@ jobs:
           additional-denied-words: ""
 
       - name: Deploy pokemon app to production
+        env:
+          environment: production
         run: |
-          helm upgrade --install pokemon-app charts/pokemon --set image.tag="${{ steps.timestamp.outputs.TIMESTAMP }}" --values charts/pokemon/values-prod.yaml -n production
+          cd helmfile && helmfile -e ${{ env }} sync
