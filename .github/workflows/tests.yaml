@@ -95,12 +95,14 @@ jobs:
 
       - name: Diff Helmfile staging
         run: helmfile diff
-        environment: "staging"
+        env:
+          environment: "staging"
         working-directory: ./helmfile
 
       - name: Diff Helmfile production
         run: helmfile diff
-        environment: "production"
+        env:
+          environment: "production"
         working-directory: ./helmfile
 
   terraform:
