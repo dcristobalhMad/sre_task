@@ -108,6 +108,9 @@ jobs:
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
           chmod 700 get_helm.sh
           ./get_helm.sh
+
+      - name: Install Helmfile
+        run: |
           wget https://github.com/helmfile/helmfile/releases/download/v0.159.0/helmfile_0.159.0_linux_amd64.tar.gz
           tar -xxf helmfile_0.159.0_linux_amd64.tar.gz
           rm helmfile_0.159.0_linux_amd64.tar.gz
@@ -117,7 +120,8 @@ jobs:
         env:
           environment: "staging"
         run: |
-          cd helmfile && helmfile -e ${environment} sync
+          helmfile -e ${environment} sync
+        working-directory: ./helmfile
       - name: manual-approval
         uses: trstringer/manual-approval@v1
         with:
@@ -134,4 +138,5 @@ jobs:
         env:
           environment: "production"
         run: |
-          cd helmfile && helmfile -e ${environment} sync
+          helmfile -e ${environment} sync
+        working-directory: ./helmfile
