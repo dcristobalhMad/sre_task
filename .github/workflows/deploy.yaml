@@ -60,6 +60,7 @@ jobs:
   Build-Push-Deploy:
     # Build and push Docker image
     runs-on: ubuntu-latest
+    needs: terraform-deploy
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -99,13 +100,44 @@ jobs:
         run: mv kubeconfig ~/.kube/config
 
       - name: Install Helm
+        working-directory: /tmp
         run: |
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
           chmod 700 get_helm.sh
           ./get_helm.sh
-      - name: Deploy pokemon app to staging
+
+      - name: Install Helmfile
+        working-directory: /tmp
         run: |
-          helm upgrade --install pokemon-app charts/pokemon --set image.tag="${{ steps.timestamp.outputs.TIMESTAMP }}" -n staging
+          wget https://github.com/helmfile/helmfile/releases/download/v0.159.0/helmfile_0.159.0_linux_amd64.tar.gz
+          tar -xvf helmfile_0.159.0_linux_amd64.tar.gz helmfile
+          rm helmfile_0.159.0_linux_amd64.tar.gz
+          mv helmfile /usr/local/bin/
+      - name: Install helm diff plugin
+        run: helm plugin install https://github.com/databus23/helm-diff
+
+      - name: Diff Helmfile staging
+        run: helmfile -e ${environment} diff
+        env:
+          environment: staging
+          TIMESTAMP: ${{ steps.timestamp.outputs.TIMESTAMP }}
+        working-directory: ./helmfile
+
+      - name: Deploy pokemon app to staging
+        env:
+          environment: staging
+          TIMESTAMP: ${{ steps.timestamp.outputs.TIMESTAMP }}
+        run: |
+          helmfile -e ${environment} sync
+        working-directory: ./helmfile
+
+      - name: Diff Helmfile production
+        run: helmfile -e ${environment} diff
+        env:
+          environment: production
+          TIMESTAMP: ${{ steps.timestamp.outputs.TIMESTAMP }}
+        working-directory: ./helmfile
+
       - name: manual-approval
         uses: trstringer/manual-approval@v1
         with:
@@ -119,5 +151,9 @@ jobs:
           additional-denied-words: ""
 
       - name: Deploy pokemon app to production
+        env:
+          environment: production
+          TIMESTAMP: ${{ steps.timestamp.outputs.TIMESTAMP }}
         run: |
-          helm upgrade --install pokemon-app charts/pokemon --set image.tag="${{ steps.timestamp.outputs.TIMESTAMP }}" --values charts/pokemon/values-prod.yaml -n production
+          helmfile -e ${environment} sync
+        working-directory: ./helmfile

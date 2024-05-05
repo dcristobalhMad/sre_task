@@ -6,6 +6,29 @@ on:
       - main
 
 jobs:
+  unit-tests:
+    name: Run PHPUnit tests
+    runs-on: ubuntu-latest
+    needs: Build-image
+    defaults:
+      run:
+        working-directory: ./code
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build and run Docker containers
+        run: docker-compose up -d
+
+      - name: Wait for containers to start
+        run: sleep 30
+
+      - name: Install dependencies
+        run: docker exec $(docker-compose ps -q php) sh -c "composer install"
+
+      - name: Run PHPUnit tests
+        run: docker exec $(docker-compose ps -q php) sh -c "php vendor/bin/phpunit test"
+
   Build-image:
     runs-on: ubuntu-latest
 
@@ -46,28 +69,6 @@ jobs:
           ignore-unfixed: true
           vuln-type: "os,library"
           severity: "CRITICAL,HIGH"
-
-  test:
-    name: Run PHPUnit tests
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./code
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Build and run Docker containers
-        run: docker-compose up -d
-
-      - name: Wait for containers to start
-        run: sleep 30
-
-      - name: Install dependencies
-        run: docker exec $(docker-compose ps -q php) sh -c "composer install"
-
-      - name: Run PHPUnit tests
-        run: docker exec $(docker-compose ps -q php) sh -c "php vendor/bin/phpunit test"
 
   terraform:
     name: "Terraform Infrastructure"
