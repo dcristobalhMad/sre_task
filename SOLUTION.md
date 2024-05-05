@@ -101,6 +101,51 @@ make dev-rm
 make dev-tests
 ```
 
+## Deploy the application manually (no recommended)
+
+### Requirements
+
+- Helmfile
+- Helm
+- Helm plugins: helm-diff
+
+### Environment variables populated
+
+- DB_HOST = host or IP address of the database server where your application's database is hosted
+- DB_USER = It's the username associated with the database that your application will use to connect to the database
+- DB_PASSWORD = used to authenticate the DB_USER when connecting to the database specified in DB_HOST
+- DB_NAME = name of the database within the DB_HOST that your application needs to connect to
+- REDIS_HOST = specifies the host or IP address of the Redis server
+- REDIS_PORT = port number on which the Redis server specified in REDIS_HOST is listening
+- MEMCACHED_HOST = specifies the host or IP address of the Memcached server
+- MEMCACHED_PORT = port number on which the Memcached server specified in MEMCACHED_HOST is listening
+- TIMESTAMP = variable used for build and deploy the application (tag in this case)
+- environment = environment where the application will be deployed (staging or production)
+
+### Usage
+
+- Check differences with the following command:
+
+```bash
+helmfile -e staging sync
+```
+
+```bash
+helmfile -e production sync
+```
+
+- Deploy the application in the staging environment with the following command:
+
+```bash
+helmfile -e staging sync
+```
+
+- Deploy the application in the production environment with the following command:
+
+```bash
+helmfile -e production sync
+```
+
 ## Improvements
 
 - Add e2e tests with kind
