@@ -115,7 +115,7 @@ jobs:
 
       - name: Deploy pokemon app to staging
         env:
-          environment: staging
+          environment: "staging"
         run: |
           cd helmfile && helmfile -e ${{ environment }} sync
       - name: manual-approval
@@ -132,6 +132,6 @@ jobs:
 
       - name: Deploy pokemon app to production
         env:
-          environment: production
+          environment: "production"
         run: |
           cd helmfile && helmfile -e ${{ env }} sync
