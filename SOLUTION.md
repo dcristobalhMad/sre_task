@@ -121,6 +121,12 @@ make dev-tests
 - MEMCACHED_PORT = port number on which the Memcached server specified in MEMCACHED_HOST is listening
 - TIMESTAMP = variable used for build and deploy the application (tag in this case)
 - environment = environment where the application will be deployed (staging or production)
+- AWS_ACCESS_KEY_ID: The access key ID used to authenticate with Amazon Web Services (AWS) APIs. Used for tf state
+- AWS_SECRET_ACCESS_KEY: The secret access key used to authenticate with Amazon Web Services (AWS) APIs. Used for tf state
+- DOCKER_PASSWORD: The TOKEN associated with the Docker Hub account specified in DOCKER_USERNAME.
+- DOCKER_USERNAME: The username used to authenticate with Docker Hub.
+- TF_VAR_CIVO_TOKEN: The authentication token used to access the Civo Cloud API in Terraform scripts.
+- TF_VAR_FLUX_GITHUB_TOKEN: The authentication token used to access GitHub repositories in Terraform scripts using Flux.
 
 ### Usage
 
