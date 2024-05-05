@@ -94,15 +94,15 @@ jobs:
           mv helmfile /usr/local/bin/
 
       - name: Diff Helmfile staging
-        run: helmfile diff
+        run: helmfile -e ${environment} diff
         env:
-          environment: "staging"
+          environment: staging
         working-directory: ./helmfile
 
       - name: Diff Helmfile production
-        run: helmfile diff
+        run: helmfile -e ${environment} diff
         env:
-          environment: "production"
+          environment: production
         working-directory: ./helmfile
 
   terraform:
