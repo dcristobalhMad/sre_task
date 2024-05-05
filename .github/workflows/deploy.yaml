@@ -122,6 +122,7 @@ jobs:
       - name: Deploy pokemon app to staging
         env:
           environment: "staging"
+          TIMESTAMP: ${{ steps.timestamp.outputs.TIMESTAMP }}
         run: |
           helmfile -e ${environment} sync
         working-directory: ./helmfile
@@ -140,6 +141,7 @@ jobs:
       - name: Deploy pokemon app to production
         env:
           environment: "production"
+          TIMESTAMP: ${{ steps.timestamp.outputs.TIMESTAMP }}
         run: |
           helmfile -e ${environment} sync
         working-directory: ./helmfile
