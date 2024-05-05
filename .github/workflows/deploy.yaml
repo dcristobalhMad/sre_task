@@ -117,7 +117,7 @@ jobs:
         env:
           environment: "staging"
         run: |
-          cd helmfile && helmfile -e ${{ environment }} sync
+          cd helmfile && helmfile -e ${environment} sync
       - name: manual-approval
         uses: trstringer/manual-approval@v1
         with:
@@ -134,4 +134,4 @@ jobs:
         env:
           environment: "production"
         run: |
-          cd helmfile && helmfile -e ${{ env }} sync
+          cd helmfile && helmfile -e ${environment} sync
