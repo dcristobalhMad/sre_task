@@ -8,7 +8,7 @@ releases:
     chart: ../charts/pokemon
     wait: true
     installed: true
-    values:
+    valuesFiles:
       - staging: values-staging.yaml
       - production: values-production.yaml
     set:
