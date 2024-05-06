@@ -9,8 +9,8 @@ environments:
 releases:
   - name: pokemon-app
     namespace: "{{ requiredEnv "environment" }}"
-    installed: "{{ requiredEnv "environment" }}"
     chart: ../charts/pokemon
+    installed: true
     wait: true
     values:
       - ./values-{{ requiredEnv "environment" }}.yaml
