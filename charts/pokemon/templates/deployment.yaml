@@ -45,11 +45,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /charmander
+              path: /healthz
               port: http
           readinessProbe:
             httpGet:
-              path: /charmander
+              path: /healthz
               port: http
           envFrom:
             - secretRef:

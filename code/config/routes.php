@@ -13,5 +13,16 @@ return static function (App $app) {
         return $response;
     });
 
+    $app->get('/healthz', function (Request $request, Response $response) {
+        // Endpoint to check health
+        $data = ['status' => 'Up and running!'];
+        $payload = json_encode($data, JSON_PRETTY_PRINT);
+        
+        $response->getBody()->write($payload);
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus(200);
+    });
+
     $app->get('/{pokemon}', ViewAction::class);
 };
