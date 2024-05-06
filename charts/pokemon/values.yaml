@@ -46,22 +46,15 @@ service:
   port: 80
 
 ingress:
-  enabled: true
+  enabled: false
   className: ""
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
+  annotations: {}
   hosts:
-    - host: staging.kcdlarioja.com
+    - host: chart-example.local
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls:
-    - hosts:
-        - staging.kcdlarioja.com
-      secretName: staging-kcdlarioja-tls
+  tls: []
 
 resources:
   {}
