@@ -12,6 +12,8 @@ releases:
     installed: "{{ requiredEnv "environment" }}"
     chart: ../charts/pokemon
     wait: true
+    values:
+      - ./values-{{ requiredEnv "environment" }}.yaml
     set:
       - name: image.tag
         value: "{{ requiredEnv "TIMESTAMP" }}"
