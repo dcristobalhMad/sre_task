@@ -12,7 +12,6 @@ releases:
     installed: "{{ requiredEnv "environment" }}"
     chart: ../charts/pokemon
     wait: true
-    installed: true
     set:
       - name: image.tag
         value: "{{ requiredEnv "TIMESTAMP" }}"
