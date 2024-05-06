@@ -1,10 +1,10 @@
 environments:
   staging:
     values: 
-      - values-staging.yaml
+      - ./values-staging.yaml
   production:
     values:
-      - values-production.yaml
+      - ./values-production.yaml
 ---
 releases:
   - name: pokemon-app
