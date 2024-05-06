@@ -1,12 +1,17 @@
+environments:
+  staging:
+    values:
+      - values-staging.yaml
+  production:
+    values:
+      - values-production.yaml
+---
 releases:
   - name: pokemon-app
     namespace: "{{ requiredEnv "environment" }}"
     chart: ../charts/pokemon
     wait: true
     installed: true
-    values:
-      - staging: values-staging.yaml
-      - production: values-production.yaml
     set:
       - name: image.tag
         value: "{{ requiredEnv "TIMESTAMP" }}"
