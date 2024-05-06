@@ -158,7 +158,6 @@ helmfile -e production sync
 - Replace the deployment of the application (FluxCD or Helmfile)
 - Use semver for the versioning of the application
 - Add observability to the application
-- Add to the application a health check endpoint for readiness and liveness
 - With Kyverno, validate the resources in the cluster and automate labeling
 - Get SBOM for the application
 - Add a terraform drift detection workflow
