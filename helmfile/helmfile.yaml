@@ -1,11 +1,3 @@
-environments:
-  staging:
-    values:
-      - ../charts/pokemon/values.yaml
-  production:
-    values:
-      - ../charts/pokemon/values.yaml
----
 releases:
   - name: pokemon-app
     namespace: "{{ requiredEnv "environment" }}"
